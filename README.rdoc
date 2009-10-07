@@ -1,0 +1,72 @@
+= sql-abstract-javascript
+
+SQL Syntax Generator for JavaScript like SQL::Abstract ( http://search.cpan.org/~nwiger/SQL-Abstract/lib/SQL/Abstract.pm ).
+
+== SYNOPSIS
+
+ var sql = new SQLAbstract;
+ var res = sql.where(['user = ? AND status = ?', 'nadeko', 'completed']);
+ // res[0] #=> 'WHERE user = ? AND status = ?'
+ // res[1] #=> ['nadeko', 'completed']
+
+ res = sql.where(['user = :user AND status = :status', {
+        user: 'nadeko',
+        status: 'completed'
+ });
+ // res[0] #=> 'WHERE user = ? AND status = ?'
+ // res[1] #=> ['nadeko', 'completed']
+
+ res = sql.where({
+     user: 'nadeko',
+     status: 'completed'
+ });
+ // res[0] #=> 'WHERE user = ? AND status = ?'
+ // res[1] #=> ['nadeko', 'completed']
+
+ res = sql.select('table', '*', {
+     user: null,
+     status: 'completed'
+ }, {
+     limit: 20,
+     offset: 10
+ });
+ // res[0] => 'select * from table WHERE user IS NULL AND status = ? LIMIT ? OFFSET ?'
+ // res[1] => ['completed', 20, 10]
+
+ res = sql.insert('table', {
+     user: 'nadeko',
+     status: 'completed'
+ });
+ // res[0] => 'insert into table (user, status) values (?, ?)'
+ // res[1] =>  ['nadeko', 'completed']
+
+ res = sql.update('table', {
+     user: 'nadeko',
+     status: 'completed'
+ });
+ // res[0] => 'update table3 SET user = ?, status = ?'
+ // res[1] =>  ['nadeko', 'completed']
+
+ res = sql.update('table', {
+     user: 'nadeko',
+     status: 'completed'
+ });
+ // res[0] => 'update table3 SET user = ?, status = ?'
+ // res[1] =>  ['nadeko', 'completed']
+
+ res = sql.deleteSql('table', {
+    id: 3
+ });
+ // res[0] => 'delete from table WHERE id = ?'
+ // res[1] =>  [3]
+
+please show test/test.js 
+
+== Author
+
+Yuichi Tateno <hotchpotch@gmail.com>
+
+== Lisence
+
+MIT Lisence
+
