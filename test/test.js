@@ -152,6 +152,11 @@ test('where', function(d) {
         status: 'completed'
     }]);
 
+    whereOK('WHERE user like ? AND status = ?', ['nadeko', 'completed'], {
+        user: {like: 'nadeko'},
+        status: 'completed'
+    });
+
     whereOK('WHERE user = ? AND status = ?', ['nadeko', 'completed'], ['user = :u AND status = :s_atus', {
         u: 'nadeko',
         s_atus: 'completed'
@@ -199,7 +204,7 @@ test('where', function(d) {
     setTimeout(function() {
     d.call();
     }, 3000);
-}, 48, 3500).
+}, 50, 3500).
 
 test('SQL Select', function(d) {
     var sql = new SQLAbstract({});
