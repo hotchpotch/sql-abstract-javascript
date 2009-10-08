@@ -118,10 +118,10 @@
             }
             stmt += ' (' + bind.join(', ') + ')';
             // stmt += ' IF NOT EXISTS ' + table;
-            return stmt;
+            return [stmt, []];
         },
         drop: function(table, force) {
-            return 'DROP TABLE ' + (!force ? 'IF EXISTS ' : '' ) + table;
+            return ['DROP TABLE ' + (!force ? 'IF EXISTS ' : '' ) + table, []];
         },
         where: function(obj) {
             if (SQLAbstract.isString(obj)) {

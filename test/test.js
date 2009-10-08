@@ -320,14 +320,14 @@ test('SQL Tables', function(d) {
     var sql = new SQLAbstract({});
 
     var dropOK = function(stmt, table, force) {
-        var wRes = sql.drop(table, force);
+        var wRes = sql.drop(table, force)[0];
         equals(wRes, stmt);
         syntaxCheck(wRes, [], true);
     }
     dropOK('DROP TABLE IF EXISTS table2', 'table2');
 
     var createOK = function(stmt, table, fields, force) {
-        var wRes = sql.create(table, fields, force);
+        var wRes = sql.create(table, fields, force)[0];
         // equals(stmt.toUpperCase(), wRes.toUpperCase());
         ok(1);
         syntaxCheck(wRes, [], true);
