@@ -204,7 +204,7 @@ test('where', function(d) {
     setTimeout(function() {
     d.call();
     }, 3000);
-}, 50, 3500).
+}, 51, 3500).
 
 test('SQL Select', function(d) {
     var sql = new SQLAbstract({});
