@@ -223,6 +223,9 @@ test('SQL Select', function(d) {
     }
 
     selectOK('select * from table3', [], 'table3');
+    selectOK('select foo as bar from table3', [], 'table3', {'foo': 'bar'});
+    selectOK('select foo, bar from table3', [], 'table3', ['foo', 'bar']);
+    selectOK('select foo as mmm, bar from table3', [], 'table3', [{'foo': 'mmm'}, 'bar']);
 
     selectOK('select * from table3 WHERE user = ? AND status = ?', ['nadeko', 'completed'], 'table3', '*', ['user = :user AND status = :status', {
         user: 'nadeko',
@@ -261,7 +264,7 @@ test('SQL Select', function(d) {
     setTimeout(function() {
         d.call();
     }, 2500);
-}, 18, 3000).
+}, 27, 3000).
 
 test('SQL Insert/Update/Delete', function(d) {
     var sql = new SQLAbstract({});

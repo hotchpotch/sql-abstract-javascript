@@ -29,7 +29,19 @@
 
     SQLAbstract.prototype = {
         select: function(table, fields, where, options) {
-            if (!fields) fields = '*';
+            if (!fields) {
+                fields = '*';
+            } else {
+                if (fields instanceof Array) {
+                    var res = [];
+                    for (var i = 0;  i < fields.length; i++) {
+                        res.push(this.field(fields[i]));
+                    }
+                    fields = res.join(', ');
+                } else {
+                    fields = this.field(fields);
+                }
+            }
             var stmt, bind = [];
             stmt = 'SELECT ' + (fields || '*') + ' FROM ' + table;
             if (where) {
@@ -43,6 +55,17 @@
                 bind = bind.concat(opt[1]);
             }
             return [stmt, bind];
+        },
+        field: function(obj) {
+            if (SQLAbstract.isString(obj)) {
+                return obj;
+            } else {
+                var res = [];
+                for (var key in obj) {
+                    res.push('' + key + ' AS ' + obj[key]);
+                }
+                return res.join(', ');
+            }
         },
         insert: function(table, data) {
             var keys = [], bind = [], values = [];
