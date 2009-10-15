@@ -158,11 +158,14 @@
             for (var key in hash) {
                 var val = hash[key];
                 if (val instanceof Array) {
-                    bind = bind.concat(val);
-                    var len = val.length;
+                    // bind = bind.concat(val);
+                    // var len = val.length;
                     var tmp = [];
-                    while (len--) {
-                        tmp.push(this.holder(key)[0]);
+                    var v;
+                    while ((v = val.shift())) {
+                        var t = this.holder(key, v);
+                        bind = bind.concat(t[1]);
+                        tmp.push(t[0]);
                     }
                     stmt.push('(' + tmp.join(' OR ') + ')');
                 } else {

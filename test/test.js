@@ -196,6 +196,12 @@ test('where', function(d) {
         status: ['assigned', 'in-progress', 'pending']
     });
 
+    whereOK('WHERE user = ? AND (status like ? OR status like ? OR status = ?)', ['nadeko', 'assigned', 'in-progress', 'pending'], {
+        user: 'nadeko',
+        status: [{'like': 'assigned'}, {'like': 'in-progress'}, 'pending']
+    });
+
+
     whereOK('WHERE user = ? AND status != ?', ['nadeko', 'completed'], {
         user: 'nadeko',
         status: {'!=': 'completed'}
@@ -204,7 +210,7 @@ test('where', function(d) {
     setTimeout(function() {
     d.call();
     }, 3000);
-}, 51, 3500).
+}, 54, 3500).
 
 test('SQL Select', function(d) {
     var sql = new SQLAbstract({});
