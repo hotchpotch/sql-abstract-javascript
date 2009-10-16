@@ -23,7 +23,7 @@
         isString: function(obj) {
             return typeof obj === 'string' || obj instanceof String;
         },
-        NOT_NULL: "0x01NOTNULL",
+        NOT_NULL: "\u0003",
         NULL: null
     });
 
