@@ -261,10 +261,21 @@ test('SQL Select', function(d) {
         offset: 10
     });
 
+    // order check. must be Group By -> Order By -> Limit -> Offset
+    selectOK('select * from table3 WHERE user IS NULL AND status = ? GROUP BY age ORDER BY user desc LIMIT ? OFFSET ?', ['completed', 20, 10], 'table3', '*', {
+        user: null,
+        status: 'completed'
+    }, {
+        order: 'user desc',
+        group: 'age',
+        limit: 20,
+        offset: 10
+    });
+
     setTimeout(function() {
         d.call();
     }, 2500);
-}, 27, 3000).
+}, 30, 3000).
 
 test('SQL Insert/Update/Delete', function(d) {
     var sql = new SQLAbstract({});

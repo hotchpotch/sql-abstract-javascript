@@ -115,11 +115,11 @@
         optionsToSQL: function(options) {
             var stmt = '', bind = [];
             if (options) {
-                if (options.order) {
-                    stmt += ' ORDER BY ' + options.order;
-                }
                 if (options.group) {
                     stmt += ' GROUP BY ' + options.group;
+                }
+                if (options.order) {
+                    stmt += ' ORDER BY ' + options.order;
                 }
                 if (typeof options.limit != 'undefined') {
                     stmt += ' LIMIT ?';
